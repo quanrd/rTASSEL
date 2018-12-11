@@ -1,4 +1,5 @@
+#' @importFrom rJava .jpackages
 #' @export
 .onLoad <- function(libname, pkgname) {
-  .jpackage(name = pkgname, jars = "*")
+  rJava::.jpackage(name = pkgname, jars = "*")
 }
