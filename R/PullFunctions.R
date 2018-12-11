@@ -37,6 +37,9 @@ sampleDataFrame <- function(jtsGenoTableOrTaxaList) {
 #' Constructor for GRanges (GenomicRanges) class object
 #' 
 #' @rdname genomicRanges
+#' @importFrom GenomicRanges GRanges
+#' @importFrom S4Vectors Rle
+#' @importFrom IRanges IRanges
 #' @export
 genomicRanges <- function(jtsGenoTable) {
     if(is(jtsGenoTable,"GenotypeTable")) {

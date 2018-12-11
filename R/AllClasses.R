@@ -83,6 +83,7 @@ setMethod(
 #' @docType class 
 #' @rdname readGenotypeTable
 #' @name readGenotypeTable
+#' @importFrom rJava .jcall
 #' @export
 readGenotypeTable <- function(path) {
   new(
