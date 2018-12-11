@@ -12,9 +12,10 @@
 #    TASSEL classes
 #--------------------------------------------------------------------
 
-source("R/AllClasses.R")
-
-## Constructor for GenotypeTable class object
+#' Constructor for GenotypeTable class object
+#' 
+#' @rdname sampleDataFrame
+#' @export
 sampleDataFrame <- function(jtsGenoTableOrTaxaList) {
   if(is(jtsGenoTableOrTaxaList,"GenotypeTable")) {
     jtsTL <- taxa(jtsGenoTableOrTaxaList)@jtsTaxaList
@@ -33,7 +34,10 @@ sampleDataFrame <- function(jtsGenoTableOrTaxaList) {
 }
 
 
-## Constructor for GRanges (GenomicRanges) class object
+#' Constructor for GRanges (GenomicRanges) class object
+#' 
+#' @rdname genomicRanges
+#' @export
 genomicRanges <- function(jtsGenoTable) {
     if(is(jtsGenoTable,"GenotypeTable")) {
         jtsGT <- positions(jtsGenoTable)@jtsPositionList

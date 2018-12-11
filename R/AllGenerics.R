@@ -12,6 +12,8 @@
 #    TASSEL S4 generics
 #--------------------------------------------------------------------
 
+#' @rdname positions
+#' @export
 setGeneric(
     name = "positions",
     def = function(object) {
@@ -19,6 +21,8 @@ setGeneric(
     }
 )
 
+#' @rdname taxa
+#' @export
 setGeneric(
   name = "taxa",
   def = function(object) {
