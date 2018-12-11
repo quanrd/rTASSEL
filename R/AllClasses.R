@@ -12,7 +12,12 @@
 #    TASSEL classes
 #--------------------------------------------------------------------
 
-## Make a GenotypeTable class
+#' Make a GenotypeTable class
+#'
+#' @docType class 
+#' @rdname GenotypeTable
+#' @name GenotypeTable
+#' @export
 setClass(
   Class = "GenotypeTable",
   representation = representation(
@@ -23,7 +28,13 @@ setClass(
   #contains = "jobjRef"
 )
 
-## Display overview when object is called
+
+#' Display overview when object is called
+#'
+#' @docType methods 
+#' @rdname show
+#' @name show
+#' @export
 setMethod(
   f = "show",
   signature = "GenotypeTable",
@@ -34,7 +45,13 @@ setMethod(
   }
 )
 
-## Get positions for GenotypeTable class objects
+
+#' Get positions for GenotypeTable class objects
+#'
+#' @docType methods 
+#' @rdname positions
+#' @name positions
+#' @export
 setMethod(
   f = "positions",
   signature = "GenotypeTable",
@@ -43,7 +60,13 @@ setMethod(
   }
 )
 
-## Get taxa for GenotypeTable class objects
+
+#' Get taxa for GenotypeTable class objects
+#'
+#' @docType methods 
+#' @rdname taxa
+#' @name taxa
+#' @export
 setMethod(
   f = "taxa",
   signature = "GenotypeTable",
@@ -52,7 +75,13 @@ setMethod(
   }
 )
 
-## Constructor for GenotypeTable class object
+
+#' Constructor for GenotypeTable class object
+#'
+#' @docType class 
+#' @rdname readGenotypeTable
+#' @name readGenotypeTable
+#' @export
 readGenotypeTable <- function(path) {
   new(
     Class = "GenotypeTable",
@@ -67,7 +96,13 @@ readGenotypeTable <- function(path) {
   )
 }
 
-## A R Wrapper for the PositionList class
+
+#' A R Wrapper for the PositionList class
+#' 
+#' @docType class
+#' @rdname PositionsList
+#' @name PositionList
+#' @export
 setClass(
   Class = "PositionList",
   representation = representation(
@@ -78,7 +113,13 @@ setClass(
   #contains = "jobjRef"
 )
 
-## Show positions lists
+
+#' Show positions lists
+#'
+#' @docType methods 
+#' @rdname show
+#' @name show
+#' @export
 setMethod(
   f = "show",
   signature = "PositionList",
@@ -89,7 +130,13 @@ setMethod(
   }
 )
 
-## A R Wrapper for the TaxaList class
+
+#' A R Wrapper for the TaxaList class
+#' 
+#' @docType class
+#' @rdname TaxaList
+#' @name TaxaList
+#' @export
 setClass(
   Class = "TaxaList",
   representation = representation(
@@ -100,7 +147,13 @@ setClass(
   #contains = "jobjRef"
 )
 
-## Show method for TaxaList class objects
+
+#' Show method for TaxaList class objects
+#' 
+#' @docType methods
+#' @rdname show
+#' @name show
+#' @export
 setMethod(
   f = "show",
   signature = "TaxaList",
