@@ -12,7 +12,12 @@
 #   for TASSEL plugins
 #--------------------------------------------------------------------
 
-source("R/AllClasses.R")
+#' Filter Site Builder plugin
+#' 
+#' @rdname filterSiteBuilderPlugin
+#' @name filterSiteBuilderPlugin
+#' @importFrom rJava .jnew
+#' @export
 filterSiteBuilderPlugin <- function(genotypeTable,
                                     siteMinCount=0,
                                     siteMinAlleleFreq=0.0,
