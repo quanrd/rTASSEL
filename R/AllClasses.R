@@ -12,6 +12,8 @@
 #    TASSEL classes
 #--------------------------------------------------------------------
 
+#' @include AllGenerics.R
+
 #' Make a GenotypeTable class
 #'
 #' @docType class 
