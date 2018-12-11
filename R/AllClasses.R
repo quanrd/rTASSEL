@@ -14,11 +14,7 @@
 
 #' @include AllGenerics.R
 
-#' Make a GenotypeTable class
-#'
-#' @docType class 
 #' @rdname GenotypeTable
-#' @name GenotypeTable
 #' @export
 setClass(
   Class = "GenotypeTable",
@@ -81,11 +77,11 @@ setMethod(
 #' Constructor for GenotypeTable class object
 #'
 #' @docType class 
-#' @rdname readGenotypeTable
-#' @name readGenotypeTable
+#' @rdname GenotypeTable
+#' @name GenotypeTable
 #' @importFrom rJava .jcall
 #' @export
-readGenotypeTable <- function(path) {
+GenotypeTable <- function(path) {
   new(
     Class = "GenotypeTable",
     #todo split path to only grab the filename
