@@ -6,6 +6,10 @@
 \usage{
 genomicRanges(jtsGenoTable)
 }
+\arguments{
+\item{jtsGenoTable}{a \code{GenotypeTable} class object}
+}
 \description{
-Constructor for GRanges (GenomicRanges) class object
+Extracts variant position information from each chromosome
+   location and stores it as a GenomicRanges (\code{GRanges}) class object
 }

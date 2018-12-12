@@ -2,10 +2,15 @@
 % Please edit documentation in R/PullFunctions.R
 \name{sampleDataFrame}
 \alias{sampleDataFrame}
-\title{Constructor for GenotypeTable class object}
+\title{Get data frame of sample taxa from GenotypeTable}
 \usage{
 sampleDataFrame(jtsGenoTableOrTaxaList)
 }
+\arguments{
+\item{jtsGenoTableOrTaxaList}{a \code{GenotypeTable} or \code{TaxaList}
+class object}
+}
 \description{
-Constructor for GenotypeTable class object
+Extracts a data frame of sample taxa from
+   \code{GenotypeTable} or \code{TaxaList} class objects.
 }

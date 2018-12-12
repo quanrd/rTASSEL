@@ -1,20 +1,28 @@
 #---------------------------------------------------------------------
 # Script Name:   PullFunctions.R
-# Description:   Various tests with rJava
+# Description:   Various pull functions for TASSEL objects
 # Author:        Brandon Monier & Ed buckler
 # Created:       2018-11-26 at 11:14:36
-# Last Modified: 2018-12-03 at 17:58:46
+# Last Modified: 2018-12-11 at 21:55:45
 #--------------------------------------------------------------------
 
 #--------------------------------------------------------------------
 # Detailed Purpose:
-#    The main purpose of this Rscript produce wrapper classes for 
-#    TASSEL classes
+#    The main purpose of this Rscript is to house the various pull
+#    functions for TASSEL objects
 #--------------------------------------------------------------------
 
-#' Constructor for GenotypeTable class object
+#' @title Get data frame of sample taxa from GenotypeTable
 #' 
+#' @description Extracts a data frame of sample taxa from
+#'    \code{GenotypeTable} or \code{TaxaList} class objects.
+#' 
+#' @param jtsGenoTableOrTaxaList a \code{GenotypeTable} or \code{TaxaList}
+#'    class object
+#' 
+#' @name sampleDataFrame
 #' @rdname sampleDataFrame
+#' 
 #' @export
 sampleDataFrame <- function(jtsGenoTableOrTaxaList) {
   if(is(jtsGenoTableOrTaxaList,"GenotypeTable")) {
@@ -34,9 +42,16 @@ sampleDataFrame <- function(jtsGenoTableOrTaxaList) {
 }
 
 
-#' Constructor for GRanges (GenomicRanges) class object
+#' @title Constructor for GRanges (GenomicRanges) class object
 #' 
+#' @description Extracts variant position information from each chromosome
+#'    location and stores it as a GenomicRanges (\code{GRanges}) class object
+#' 
+#' @param jtsGenoTable a \code{GenotypeTable} class object
+#' 
+#' @name genomicRanges
 #' @rdname genomicRanges
+#' 
 #' @importFrom GenomicRanges GRanges
 #' @importFrom S4Vectors Rle
 #' @importFrom IRanges IRanges
@@ -64,5 +79,3 @@ genomicRanges <- function(jtsGenoTable) {
     )
     return(gr2)
 }
-
-

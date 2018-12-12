@@ -3,7 +3,7 @@
 # Description:   Various tests with rJava
 # Author:        Brandon Monier & Ed buckler
 # Created:       2018-11-26 at 11:14:36
-# Last Modified: 2018-12-03 at 17:58:46
+# Last Modified: 2018-12-11 at 21:55:45
 #--------------------------------------------------------------------
 
 #--------------------------------------------------------------------
@@ -12,8 +12,11 @@
 #    TASSEL S4 generics
 #--------------------------------------------------------------------
 
-#' @rdname positions
-#' @export
+#' @title Get positions from TASSEL objects
+#' 
+#' @name positions
+#' @rdname positions-methods
+#' @exportMethod positions
 setGeneric(
     name = "positions",
     def = function(object) {
@@ -21,8 +24,12 @@ setGeneric(
     }
 )
 
-#' @rdname taxa
-#' @export
+
+#' @title Get taxa from TASSEL objects
+#' 
+#' @name taxa
+#' @rdname taxa-methods
+#' @exportMethod taxa
 setGeneric(
   name = "taxa",
   def = function(object) {

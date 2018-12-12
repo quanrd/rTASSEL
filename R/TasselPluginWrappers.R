@@ -3,7 +3,7 @@
 # Description:   Various tests with rJava
 # Author:        Brandon Monier & Ed buckler
 # Created:       2018-11-26 at 11:14:36
-# Last Modified: 2018-12-03 at 17:58:46
+# Last Modified: 2018-12-11 at 21:55:45
 #--------------------------------------------------------------------
 
 #--------------------------------------------------------------------
@@ -12,20 +12,37 @@
 #   for TASSEL plugins
 #--------------------------------------------------------------------
 
-#' Filter Site Builder plugin
+#' @title Filter Site Builder plugin
+#' 
+#' @description Filters a \code{GenotypeTable} class object. This function
+#'    is similar to the \code{-FilterSiteBuilderPlugin} in TASSEL.
+#' 
+#' @param genotypeTable A \code{GenotypeTable} class object.
+#' @param siteMinCount Site minimum count of alleles not unknown. Can take
+#'    any whole number from \code{0} to \code{Inf}. Defaults to \code{0}.
+#' @param siteMinAlleleFreq Site minimum minor allele frequency. Can take
+#'    any real number from \code{0.0} to \code{1.0}. Defaults to \code{0.0}.
+#' @param siteMaxAlleleFreq Site maximum minor allele frequency. Can take
+#'    any real number from \code{0.0} to \code{1.0}. Defaults to \code{1.0}.
+#' @param minHeterozygous Minimum heterozygous proportion. Can take any real
+#'    number from \code{0.0} to \code{1.0}. Defaults to \code{0.0}
+#' @param maxHeterozygous Maximum heterozygous proportion. Can take any real
+#'    number from \code{0.0} to \code{1.0}. Defaults to \code{1.0}
+#' @param startSite Start site. Defaults to \code{0}
+#' @param endSite End site. Defaults to \code{0}
 #' 
 #' @rdname filterSiteBuilderPlugin
 #' @name filterSiteBuilderPlugin
 #' @importFrom rJava .jnew
 #' @export
 filterSiteBuilderPlugin <- function(genotypeTable,
-                                    siteMinCount=0,
-                                    siteMinAlleleFreq=0.0,
-                                    siteMaxAlleleFreq=1.0,
-                                    minHeterozygous=0.0,
-                                    maxHeterozygous=1.0,
-                                    startSite=0,
-                                    endSite=0
+                                    siteMinCount = 0,
+                                    siteMinAlleleFreq = 0.0,
+                                    siteMaxAlleleFreq = 1.0,
+                                    minHeterozygous = 0.0,
+                                    maxHeterozygous = 1.0,
+                                    startSite = 0,
+                                    endSite = 0
 ) {
   # Unwrap the java object if necessary
   if(is(genotypeTable,"GenotypeTable") == TRUE) {

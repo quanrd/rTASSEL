@@ -8,6 +8,29 @@ filterSiteBuilderPlugin(genotypeTable, siteMinCount = 0,
   siteMinAlleleFreq = 0, siteMaxAlleleFreq = 1, minHeterozygous = 0,
   maxHeterozygous = 1, startSite = 0, endSite = 0)
 }
+\arguments{
+\item{genotypeTable}{A \code{GenotypeTable} class object.}
+
+\item{siteMinCount}{Site minimum count of alleles not unknown. Can take
+any whole number from \code{0} to \code{Inf}. Defaults to \code{0}.}
+
+\item{siteMinAlleleFreq}{Site minimum minor allele frequency. Can take
+any real number from \code{0.0} to \code{1.0}. Defaults to \code{0.0}.}
+
+\item{siteMaxAlleleFreq}{Site maximum minor allele frequency. Can take
+any real number from \code{0.0} to \code{1.0}. Defaults to \code{1.0}.}
+
+\item{minHeterozygous}{Minimum heterozygous proportion. Can take any real
+number from \code{0.0} to \code{1.0}. Defaults to \code{0.0}}
+
+\item{maxHeterozygous}{Maximum heterozygous proportion. Can take any real
+number from \code{0.0} to \code{1.0}. Defaults to \code{1.0}}
+
+\item{startSite}{Start site. Defaults to \code{0}}
+
+\item{endSite}{End site. Defaults to \code{0}}
+}
 \description{
-Filter Site Builder plugin
+Filters a \code{GenotypeTable} class object. This function
+   is similar to the \code{-FilterSiteBuilderPlugin} in TASSEL.
 }

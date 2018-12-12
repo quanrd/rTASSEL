@@ -3,7 +3,7 @@
 # Description:   All classes for rTASSEL
 # Author:        Brandon Monier & Ed Buckler
 # Created:       2018-11-26 at 11:14:36
-# Last Modified: 2018-12-03 at 17:58:46
+# Last Modified: 2018-12-11 at 21:55:45
 #--------------------------------------------------------------------
 
 #--------------------------------------------------------------------
@@ -12,10 +12,18 @@
 #    TASSEL classes
 #--------------------------------------------------------------------
 
-#' @include AllGenerics.R
 
-#' @rdname GenotypeTable
-#' @export
+#--------------------------------------------------------------------
+# GenotypeTable Class
+#--------------------------------------------------------------------
+
+#' @title Class GenotypeTable
+#' 
+#' @details Class \code{GenotypeTable} defines a GenotypeTable from TASSEL
+#' 
+#' @name GenotypeTable-class
+#' @rdname GenotypeTable-class
+#' @exportClass GenotypeTable
 setClass(
   Class = "GenotypeTable",
   representation = representation(
@@ -27,58 +35,12 @@ setClass(
 )
 
 
-#' Display overview when object is called
+#' @title Wrapper function for GenotypeTable class object
 #'
-#' @docType methods 
-#' @rdname show
-#' @name show
-#' @export
-setMethod(
-  f = "show",
-  signature = "GenotypeTable",
-  definition = function(object) {
-    cat("Genotype Table Name: ",object@name,"\n")
-    cat(is(object)," wraps ", show(object@jtsGenotypeTable) ,"\n")
-    cat("Sites: ",object@jtsGenotypeTable$numberOfSites(), " Taxa: ",object@jtsGenotypeTable$numberOfTaxa(),"\n")
-  }
-)
-
-
-#' Get positions for GenotypeTable class objects
+#' @param path a path to a \code{VCF} file
 #'
-#' @docType methods 
-#' @rdname positions
-#' @name positions
-#' @export
-setMethod(
-  f = "positions",
-  signature = "GenotypeTable",
-  definition = function(object) {
-    new("PositionList",name="TASSEL Position List", jtsPositionList=object@jtsGenotypeTable$positions())
-  }
-)
-
-
-#' Get taxa for GenotypeTable class objects
-#'
-#' @docType methods 
-#' @rdname taxa
-#' @name taxa
-#' @export
-setMethod(
-  f = "taxa",
-  signature = "GenotypeTable",
-  definition = function(object) {
-    new("TaxaList",name="TASSEL Taxa List", jtsTaxaList=object@jtsGenotypeTable$taxa())
-  }
-)
-
-
-#' Constructor for GenotypeTable class object
-#'
-#' @docType class 
-#' @rdname GenotypeTable
 #' @name GenotypeTable
+#' @rdname GenotypeTable
 #' @importFrom rJava .jcall
 #' @export
 GenotypeTable <- function(path) {
@@ -96,12 +58,18 @@ GenotypeTable <- function(path) {
 }
 
 
+
+#---------------------------------------------------------------------
+# PositionList Class
+#---------------------------------------------------------------------
+
 #' A R Wrapper for the PositionList class
 #' 
-#' @docType class
-#' @rdname PositionsList
-#' @name PositionList
-#' @export
+#' @details Class \code{PositionList} defines a PositionList from TASSEL
+#' 
+#' @name PositionList-class
+#' @rdname PositionList-class
+#' @exportClass PositionList
 setClass(
   Class = "PositionList",
   representation = representation(
@@ -113,29 +81,18 @@ setClass(
 )
 
 
-#' Show positions lists
-#'
-#' @docType methods 
-#' @rdname show
-#' @name show
-#' @export
-setMethod(
-  f = "show",
-  signature = "PositionList",
-  definition = function(object) {
-    cat("Position List Name: ",object@name,"\n")
-    cat(is(object)," wraps ", show(object@jtsPositionList) ,"\n")
-    cat("Sites: ",object@jtsPositionList$size(),"\n")
-  }
-)
 
+#---------------------------------------------------------------------
+# TaxaList Class
+#---------------------------------------------------------------------
 
 #' A R Wrapper for the TaxaList class
 #' 
-#' @docType class
-#' @rdname TaxaList
-#' @name TaxaList
-#' @export
+#' @details Class \code{TaxaList} defines a TaxaList from TASSEL
+#' 
+#' @name TaxaList-class
+#' @rdname TaxaList-class
+#' @exportClass TaxaList
 setClass(
   Class = "TaxaList",
   representation = representation(
@@ -147,18 +104,4 @@ setClass(
 )
 
 
-#' Show method for TaxaList class objects
-#' 
-#' @docType methods
-#' @rdname show
-#' @name show
-#' @export
-setMethod(
-  f = "show",
-  signature = "TaxaList",
-  definition = function(object) {
-    cat("Taxa List Name: ",object@name,"\n")
-    cat(is(object)," wraps ", show(object@jtsTaxaList) ,"\n")
-    cat("Taxa: ",object@jtsTaxaList$size(),"\n")
-  }
-)
+

@@ -1,7 +1,7 @@
 ## rtassel
 
 ### Objective
-To creat an R front-end for the Java program, `TASSEL` using `rJava`
+To create an R front-end for the Java program, `TASSEL` using `rJava`
 
 ### Installation
 Currently, you can install a "bare-bones" version of `rTASSEL` from BitBucket
@@ -16,4 +16,4 @@ devtools::install_bitbucket("bucklerlab/rtassel", ref = "Brandon")
 *TBD*
 
 - - -
-*Last Modified:* 2018-12-11 at 17:44:58
+*Last Modified:* 2018-12-11 at 20:43:29
