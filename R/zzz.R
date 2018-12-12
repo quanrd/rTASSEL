@@ -3,6 +3,7 @@
 .onLoad <- function(libname, pkgname) {
     packageStartupMessage(
         paste0(
+            "\n",
             "Welcome to rTASSEL\n\n",
             "--- NOTE ---\n",
             "Keep in mind that this package is in the early\n",
