@@ -3,7 +3,7 @@
 # Description:   Functions for caclulating linkage disequilibrium
 # Author:        Brandon Monier
 # Created:       2019-06-27 at 10:00:00
-# Last Modified: 2019-06-27 at 18:19:09
+# Last Modified: 2019-06-27 at 18:38:47
 #--------------------------------------------------------------------
 
 #--------------------------------------------------------------------
@@ -17,6 +17,9 @@
 #'   dataset.
 #'
 #' @description Generates a linkage disequilibrium (LD) data set from SNP data.
+#'
+#' @name assocModelFitter
+#' @rdname assocModelFitter
 #'
 #' @param tasObj An object of class \code{TasselGenotypePenotype}.
 #' @param ldType How do you want LD calculated? Currently, the available
@@ -50,6 +53,8 @@
 #'   is meaningless when scored with very small sample sizes, a minimum of 20
 #'   taxa must be present to calculate LD and there must be 2 or more minor
 #'   alleles.
+#'
+#' @return Returns a \code{tibble}-based data frame.
 #'
 #' @importFrom rJava is.jnull
 #' @importFrom rJava J
@@ -103,7 +108,9 @@ linkageDiseq <- function(tasObj,
     ldObjDF <- tasTableConvert(ldObj)
 
     # Convert tables to proper data types (numeric)
-    ldObjDF[c(1:4, 7:10, 13:17)] <- suppressWarnings(lapply(ldObjDF[c(1:4, 7:10, 13:17)] , as.numeric))
+    ldObjDF[c(1:4, 7:10, 13:17)] <- suppressWarnings(
+        lapply(ldObjDF[c(1:4, 7:10, 13:17)] , as.numeric)
+    )
 
     # Convert tables to proper data types (factor)
     ldObjDF[c(5, 11)] <- lapply(ldObjDF[c(5, 11)], factor)
