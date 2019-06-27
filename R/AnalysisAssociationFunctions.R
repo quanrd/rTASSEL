@@ -578,21 +578,3 @@ tasAssocTableConvert <- function(assocType, assocConvOut, notTaxaCols, finalResp
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
