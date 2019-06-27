@@ -18,8 +18,8 @@
 #'
 #' @description Generates a linkage disequilibrium (LD) data set from SNP data.
 #'
-#' @name assocModelFitter
-#' @rdname assocModelFitter
+#' @name linkageDiseq
+#' @rdname linkageDiseq
 #'
 #' @param tasObj An object of class \code{TasselGenotypePenotype}.
 #' @param ldType How do you want LD calculated? Currently, the available

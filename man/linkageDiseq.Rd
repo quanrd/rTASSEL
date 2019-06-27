@@ -25,6 +25,9 @@ will need to specify window size.}
 are \code{"ignore"} (ignore altogether), \code{"missing"}
 (set to missing), and \code{"third"} (treat as third state).}
 }
+\value{
+Returns a \code{tibble}-based data frame.
+}
 \description{
 Generates a linkage disequilibrium (LD) data set from SNP data.
 }
