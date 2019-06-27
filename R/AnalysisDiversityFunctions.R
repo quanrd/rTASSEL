@@ -82,7 +82,7 @@ linkageDiseq <- function(tasObj,
 
     # Logic - check for ldType and windowSize compatability
     if (ldType == "SlidingWindow" & is.null(windowSize)) {
-        message("`windowSize` is not set - setting to `-1`")
+        message("`windowSize` is not set - setting to `1`")
         windowSize <- 1
     }
 
@@ -97,13 +97,13 @@ linkageDiseq <- function(tasObj,
         as.integer(windowSize), # Window size
         hetCalls                # heterozygous calls
     )
-    ldObj <- ldOBJ$toStringTabDelim()
+    ldObj <- ldObj$toStringTabDelim()
 
     # Generate a tibble object (rTASSEL housekeeping function)
     ldObjDF <- tasTableConvert(ldObj)
 
     # Convert tables to proper data types (numeric)
-    ldObjDF[c(1:4, 7:10, 13:17)] <- lapply(ldObjDF[c(1:4, 7:10, 13:17)] , as.numeric)
+    ldObjDF[c(1:4, 7:10, 13:17)] <- suppressWarnings(lapply(ldObjDF[c(1:4, 7:10, 13:17)] , as.numeric))
 
     # Convert tables to proper data types (factor)
     ldObjDF[c(5, 11)] <- lapply(ldObjDF[c(5, 11)], factor)
