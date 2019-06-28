@@ -5,9 +5,10 @@
 #' @param ldData An LD data frame.
 #'
 #' @import shiny
+#' @importFrom plotly layout
 #' @importFrom plotly plot_ly
+#' @importFrom plotly plotlyOutput
 #' @importFrom plotly renderPlotly
-#' @importFRom plotly plotlyOutput
 #'
 #' @export
 linkageDiseqApp <- function(ldData) {
@@ -16,6 +17,11 @@ linkageDiseqApp <- function(ldData) {
         shiny::h4("rTASSEL - Linkage Disequilibrium"),
         shiny::sidebarLayout(
             shiny::sidebarPanel(
+                shiny::numericInput(
+                    inputId = "window",
+                    label = "Window size",
+                    value = 50
+                ),
                 shiny::selectInput(
                     inputId = "matVal",
                     label = "Value type",
@@ -27,21 +33,21 @@ linkageDiseqApp <- function(ldData) {
                 )
             ),
             shiny::mainPanel(
-                plotly::plotlyOutput("distPlot"),
-                shiny::sliderInput(
-                    inputId = "xMov",
-                    label = "Move Window (x axis)",
-                    min = 1,
-                    max = 100,
-                    value = c(1, 25)
-                ),
-                shiny::sliderInput(
-                    inputId = "yMov",
-                    label = "Move Window (y axis)",
-                    min = 1,
-                    max = 100,
-                    value = c(1, 25)
-                )
+                plotly::plotlyOutput("distPlot")
+                # shiny::sliderInput(
+                #     inputId = "xMov",
+                #     label = "Move Window (x axis)",
+                #     min = 1,
+                #     max = 100,
+                #     value = c(1, 25)
+                # ),
+                # shiny::sliderInput(
+                #     inputId = "yMov",
+                #     label = "Move Window (y axis)",
+                #     min = 1,
+                #     max = 100,
+                #     value = c(1, 25)
+                # )
             )
         )
     ))
@@ -51,17 +57,17 @@ linkageDiseqApp <- function(ldData) {
             ## Get LD matrix
             ldOut <- ldDFToMat(
                 ldData,
-                matVal = input$matVal
+                matVal = input$matVal,
+                window = input$window
             )
 
             ## Sub LD matrix
             # ldOutSub <- ldOut[input$yMov[1]:input$yMov[2], input$xMov[1]:input$xMov[2]]
             # shiny::verbatimTextOutput()
-            ldOutSub <- ldOut[1:25, 1:25]
+            # ldOutSub <- ldOut[1:25, 1:25]
 
             ## Plotly metadata and parameters
             ax <- list(
-                title = "",
                 zeroline = FALSE,
                 showline = FALSE,
                 showticklabels = FALSE,
@@ -70,13 +76,12 @@ linkageDiseqApp <- function(ldData) {
 
             ## The Plotly plot
             plotly::plot_ly(
-                x = colnames(ldOutSub),
-                y = rownames(ldOutSub),
-                z = ldOutSub,
+                x = colnames(ldOut),
+                y = rownames(ldOut),
+                z = ldOut,
                 type = "heatmap"
             ) %>% plotly::layout(xaxis = ax, yaxis = ax)
         })
-
     }
 
     shiny::shinyApp(ui, server)
@@ -84,6 +89,8 @@ linkageDiseqApp <- function(ldData) {
 
 
 ## LD dataframe to matrix converter - not exported (house keeping)
+
+#' @importFrom stringr str_sort
 ldDFToMat <- function(ldDF,
                       matVal = c("R^2", "pDiseq", "DPrime"),
                       window = 200,

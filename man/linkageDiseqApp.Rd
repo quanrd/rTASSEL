@@ -4,7 +4,10 @@
 \alias{linkageDiseqApp}
 \title{LD visualization application}
 \usage{
-linkageDiseqApp()
+linkageDiseqApp(ldData)
+}
+\arguments{
+\item{ldData}{An LD data frame.}
 }
 \description{
 Runs an interactive visualizer for an LD object
