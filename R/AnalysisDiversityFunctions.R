@@ -61,7 +61,7 @@
 #'
 #' @export
 linkageDiseq <- function(tasObj,
-                         ldType = c("All", "SlidingWindow"),
+                         ldType = c("SlidingWindow", "All"),
                          windowSize = NULL,
                          hetCalls = c("missing", "ignore", "third")) {
 
