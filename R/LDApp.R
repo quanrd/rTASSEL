@@ -20,7 +20,7 @@ linkageDiseqApp <- function(ldData) {
                 shiny::numericInput(
                     inputId = "window",
                     label = "Window size",
-                    value = 50
+                    value = 10
                 ),
                 shiny::selectInput(
                     inputId = "matVal",
@@ -33,38 +33,59 @@ linkageDiseqApp <- function(ldData) {
                 )
             ),
             shiny::mainPanel(
-                plotly::plotlyOutput("distPlot")
-                # shiny::sliderInput(
-                #     inputId = "xMov",
-                #     label = "Move Window (x axis)",
-                #     min = 1,
-                #     max = 100,
-                #     value = c(1, 25)
-                # ),
-                # shiny::sliderInput(
-                #     inputId = "yMov",
-                #     label = "Move Window (y axis)",
-                #     min = 1,
-                #     max = 100,
-                #     value = c(1, 25)
-                # )
+                plotly::plotlyOutput("distPlot"),
+                # uiOutput("xMov"),
+                # uiOutput("yMov")
+                shiny::sliderInput(
+                    inputId = "xMov",
+                    label = "Move Window (x axis)",
+                    min = 1,
+                    max = 100,
+                    value = 1
+                ),
+                shiny::sliderInput(
+                    inputId = "yMov",
+                    label = "Move Window (y axis)",
+                    min = 1,
+                    max = 100,
+                    value = 1
+                ),
+                shiny::verbatimTextOutput("ldDebug")
             )
         )
     ))
 
     server <- function(input, output) {
+        # output$xMov <- shiny::renderUI({
+        #     shiny::sliderInput(
+        #         inputId = "xMovActive",
+        #         label = "Move Window (x axis)",
+        #         min = 1,
+        #         max = 3000,
+        #         value = 1
+        #     )
+        # })
+        # output$yMov <- shiny::renderUI({
+        #     shiny::sliderInput(
+        #         inputId = "yMovActive",
+        #         label = "Move Window (y axis)",
+        #         min = 1,
+        #         max = 3000,
+        #         value = 1
+        #     )
+        # })
         output$distPlot <- plotly::renderPlotly({
             ## Get LD matrix
-            ldOut <- ldDFToMat(
-                ldData,
+            ldOut <- ldDFToShinyMat(
+                ldDF = ldData,
                 matVal = input$matVal,
-                window = input$window
+                x_range_1 = input$xMov,
+                x_range_2 = input$xMov + input$window,
+                # x_range_2 = (input$xMovActive + input$window) - 1,
+                y_range_1 = input$yMov,
+                y_range_2 = input$yMov + input$window
+                # y_range_2 = (input$yMovActive + input$window) - 1
             )
-
-            ## Sub LD matrix
-            # ldOutSub <- ldOut[input$yMov[1]:input$yMov[2], input$xMov[1]:input$xMov[2]]
-            # shiny::verbatimTextOutput()
-            # ldOutSub <- ldOut[1:25, 1:25]
 
             ## Plotly metadata and parameters
             ax <- list(
@@ -82,6 +103,17 @@ linkageDiseqApp <- function(ldData) {
                 type = "heatmap"
             ) %>% plotly::layout(xaxis = ax, yaxis = ax)
         })
+
+        output$ldDebug <- shiny::renderPrint({
+            debug_list <- list(
+                x_range_1 = input$xMov,
+                x_range_2 = input$xMov + input$window,
+                y_range_1 = input$yMov,
+                y_range_2 = input$yMov + input$window
+            )
+            cat("--- LD DEBUG ---\n")
+            debug_list
+        })
     }
 
     shiny::shinyApp(ui, server)
@@ -91,9 +123,12 @@ linkageDiseqApp <- function(ldData) {
 ## LD dataframe to matrix converter - not exported (house keeping)
 
 #' @importFrom stringr str_sort
-ldDFToMat <- function(ldDF,
+ldDFToShinyMat <- function(ldDF,
                       matVal = c("R^2", "pDiseq", "DPrime"),
-                      window = 200,
+                      x_range_1,
+                      x_range_2,
+                      y_range_1,
+                      y_range_2,
                       subSet = NULL) {
 
     matVal <- match.arg(matVal)
@@ -124,13 +159,15 @@ ldDFToMat <- function(ldDF,
     mat[matExMat[, 1:2]] <- as.numeric(matExMat[, 3])
 
     # Sub Matrix
-    matSub <- mat[1:window, 1:window]
+    matSub <- mat[x_range_1:x_range_2, y_range_1:y_range_2]
 
     # Rotate and visualze
-    matCorrect <- t(apply(matSub, 2, rev))
+    # matCorrect <- t(apply(matSub, 2, rev))
+    # matCorrect <- matSub
 
     # Return
-    return(matCorrect)
+    return(matSub)
+    # return(dim(mat))
 }
 
 
