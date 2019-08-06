@@ -159,7 +159,12 @@ ldDFToShinyMat <- function(ldDF,
     mat[matExMat[, 1:2]] <- as.numeric(matExMat[, 3])
 
     # Sub Matrix
-    matSub <- mat[x_range_1:x_range_2, y_range_1:y_range_2]
+    matSub <- mat[y_range_1:y_range_2, x_range_1:x_range_2]
+
+    if (all(is.na(matSub))) {
+        matSub[is.na(matSub)] <- 0
+    }
+
 
     # Rotate and visualze
     # matCorrect <- t(apply(matSub, 2, rev))
