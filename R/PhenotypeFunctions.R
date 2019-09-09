@@ -215,9 +215,10 @@ readPhenotypeFromSumExp <- function(sumExp,
         stop("SummarizedExperiment class not detected")
     }
 
-    taxaNames <- rownames(sumExp)
-    notTaxaCols <- colnames(phenotypeDF)
-    # notTaxaCols <- colnames[!colnames %in% taxaID]
+    taxaNames <- colnames(sumExp)
+    notTaxaCols <- c(names(colData(karSE)), rownames(karSE))
+
+    phenotypeDF <- cbind(colData(karSE), t(assay(karSE)))
 
     ## TODO:
     if(is.null(attributeTypes)) {
@@ -229,7 +230,7 @@ readPhenotypeFromSumExp <- function(sumExp,
     for (col_i in notTaxaCols) {
         jList$add(.jarray(phenotypeDF[[col_i]]))
     }
-    jc <- J("net/maizegenetics/plugindef/GenerateRCode")
+    jc <- rJava::J("net/maizegenetics/plugindef/GenerateRCode")
     jc <- jc$createPhenotypeFromRDataFrameElements(
         taxaNames,
         rJava::.jarray(notTaxaCols),
