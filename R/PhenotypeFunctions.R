@@ -192,3 +192,54 @@ extractPhenotypeAttDf <- function(phenotype) {
     )
     return(data.frame(traitName, traitType, traitAttribute))
 }
+
+
+## Read phenotype table from a Summarized Experiment class
+readPhenotypeFromSumExp <- function(sumExp,
+                                    attributeTypes = NULL) {
+    safeAtt <- c("covariate", "data", "factor", "taxa")
+    if (!is.null(attributeTypes) & !all(attributeTypes %in% safeAtt)) {
+        stop(
+            paste0(
+                "Parameter `attributeTypes` contains incorrect attributes.\n",
+                "Please select from the following:\n",
+                "  taxa\n",
+                "  factor\n",
+                "  data\n",
+                "  covariate\n"
+            )
+        )
+    }
+
+    if (!inherits(x = sumExp, what = "SummarizedExperiment")) {
+        stop("SummarizedExperiment class not detected")
+    }
+
+    taxaNames <- rownames(sumExp)
+    notTaxaCols <- colnames(phenotypeDF)
+    # notTaxaCols <- colnames[!colnames %in% taxaID]
+
+    ## TODO:
+    if(is.null(attributeTypes)) {
+        atttype <- c(rep("data", length(notTaxaCols)))
+    } else {
+        atttype <- attributeTypes
+    }
+    jList <- rJava::new(rJava::J("java/util/ArrayList"))
+    for (col_i in notTaxaCols) {
+        jList$add(.jarray(phenotypeDF[[col_i]]))
+    }
+    jc <- J("net/maizegenetics/plugindef/GenerateRCode")
+    jc <- jc$createPhenotypeFromRDataFrameElements(
+        taxaNames,
+        rJava::.jarray(notTaxaCols),
+        rJava::.jarray(atttype),
+        jList
+    )
+    return(.tasselObjectConstructor(jc))
+}
+
+
+
+
+
