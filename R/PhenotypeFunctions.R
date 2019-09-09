@@ -239,8 +239,3 @@ readPhenotypeFromSumExp <- function(sumExp,
     )
     return(.tasselObjectConstructor(jc))
 }
-
-
-
-
-
