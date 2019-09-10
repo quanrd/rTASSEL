@@ -216,9 +216,9 @@ readPhenotypeFromSumExp <- function(sumExp,
     }
 
     taxaNames <- colnames(sumExp)
-    notTaxaCols <- c(names(colData(karSE)), rownames(karSE))
+    notTaxaCols <- c(names(colData(sumExp)), rownames(sumExp))
 
-    phenotypeDF <- cbind(colData(karSE), t(assay(karSE)))
+    phenotypeDF <- cbind(colData(sumExp), t(assay(sumExp)))
 
     ## TODO:
     if(is.null(attributeTypes)) {
